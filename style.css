@@ -1,0 +1,305 @@
+/* GENERAL RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f0f4f8;
+  color: #111827;
+}
+
+/* HEADER */
+header {
+  background: #1f2937;
+  color: #f8fafc;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #38bdf8;
+}
+
+nav a, nav button {
+  margin-left: 10px;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+nav a {
+  background: #2563eb;
+  color: white;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  background: #1e40af;
+}
+
+nav button {
+  background: #10b981;
+  color: white;
+  transition: 0.3s;
+}
+
+nav button:hover {
+  background: #047857;
+}
+
+/* HERO / FORM SECTION */
+.section {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 40px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.section p {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #6b7280;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input, select, button {
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  font-size: 1rem;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 5px rgba(37,99,235,0.3);
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+/* SUCCESS / ERROR MESSAGE */
+#message {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* ADMIN TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+tr:hover {
+  background: #f9fafb;
+}
+
+select {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+/* Align action column & controls */
+#table th:last-child,
+#table td:last-child {
+  text-align: center;
+  vertical-align: middle;
+  width: 120px;
+  padding: 12px 10px;
+}
+
+#table td:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#table .delete-btn {
+  background: #ef4444;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+#table select {
+  height: 36px;
+  padding: 6px 10px;
+}
+
+/* Keep table readable: allow horizontal scrolling and prevent tiny column widths */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Give the table a sensible minimum width so content doesn't stack per-character */
+#table {
+  width: 100%;
+  min-width: 760px; /* tweak as needed */
+  table-layout: auto;
+}
+
+/* Keep header labels on one line, prevent body cells splitting letters */
+#table thead th {
+  white-space: nowrap;
+}
+#table tbody td {
+  white-space: nowrap;    /* keep whole words on single line (no "d e l e t e") */
+  word-break: normal;     /* don't break words mid-letter */
+  overflow: visible;
+}
+
+/* Prevent controls from wrapping inside cells */
+#table button,
+#table select {
+  white-space: nowrap;
+  width: auto;
+  max-width: 160px;
+  box-sizing: border-box;
+  padding: 8px 12px;
+}
+
+/* Make action column compact and align right */
+#table td:last-child {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Reduce min-width slightly on narrow screens to allow scrolling */
+@media (max-width: 640px) {
+  #table { min-width: 640px; }
+}
+
+/* keep layout usable on small screens */
+@media (max-width: 640px) {
+  #table th:last-child,
+  #table td:last-child { width: 120px; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px){
+  .section {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  nav a, nav button {
+    margin-left: 0;
+  }
+}
+
+/* ===== DASHBOARD STATS ===== */
+.stats-row {
+  max-width: 1000px;
+  margin: 40px auto 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 5px;
+}
+
+.stat-card p {
+  font-size: 28px;
+  font-weight: bold;
+  color: #111827;
+}
+
+/* Mobile */
+@media (max-width: 768px){
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.trust-badges span {
+  background: #e0f2fe;
+  padding: 6px 10px;
+  border-radius: 10px;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BookingPro</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1 class="logo">BookingPro</h1>
+  <nav>
+    <a href="admin-login.html">Admin</a>
+  </nav>
+</header>
+
+<section class="section">
+  <h2>Book a Session</h2>
+  <p>Fast, secure & automated booking system — no WhatsApp needed.</p>
+
+  <div class="trust-badges">
+    <span>⚡ Instant Confirmation</span>
+    <span>🔒 Secure Data</span>
+    <span>📅 Live Availability</span>
+  </div>
+
+  <form id="bookingForm">
+    <input id="name" placeholder="Your Name" required>
+    <input id="email" type="email" placeholder="Email" required>
+    <select id="service" required>
+      <option value="">Select Service</option>
+      <option>Consultation</option>
+      <option>Website Development</option>
+      <option>Booking System Setup</option>
+    </select>
+    <input id="date" type="date" required>
+    <input id="time" type="time" required>
+    <button type="submit">Confirm Booking</button>
+  </form>
+
+  <p id="message"></p>
+</section>
+
+
+<script src="script.js"></script>
+</body>
+</html>
