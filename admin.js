@@ -1,4 +1,4 @@
-if(localStorage.getItem("adminLoggedIn") !== "true"){
+if (localStorage.getItem("adminLoggedIn") !== "true") {
   window.location.href = "admin-login.html";
 }
 
@@ -9,17 +9,19 @@ const pendingCount = document.getElementById("pendingCount");
 const approvedCount = document.getElementById("approvedCount");
 const rejectedCount = document.getElementById("rejectedCount");
 
+function render() {
+  // re-read storage so admin page updates when bookings change elsewhere
+  bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-function render(){
-    function updateStats(){
+  // update stats
   totalCount.textContent = bookings.length;
-  pendingCount.textContent = bookings.filter(b => b.status==="Pending").length;
-  approvedCount.textContent = bookings.filter(b => b.status==="Approved").length;
-  rejectedCount.textContent = bookings.filter(b => b.status==="Rejected").length;
-}
+  pendingCount.textContent = bookings.filter(b => b.status === "Pending").length;
+  approvedCount.textContent = bookings.filter(b => b.status === "Approved").length;
+  rejectedCount.textContent = bookings.filter(b => b.status === "Rejected").length;
 
+  // render table rows
   tbody.innerHTML = "";
-  bookings.forEach((b,i)=>{
+  bookings.forEach((b, i) => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${b.name}</td>
@@ -29,43 +31,43 @@ function render(){
       <td>${b.time}</td>
       <td>
         <select onchange="updateStatus(${i}, this.value)">
-          <option ${b.status==="Pending"?"selected":""}>Pending</option>
-          <option ${b.status==="Approved"?"selected":""}>Approved</option>
-          <option ${b.status==="Rejected"?"selected":""}>Rejected</option>
+          <option ${b.status === "Pending" ? "selected" : ""}>Pending</option>
+          <option ${b.status === "Approved" ? "selected" : ""}>Approved</option>
+          <option ${b.status === "Rejected" ? "selected" : ""}>Rejected</option>
         </select>
       </td>
-      <td><button onclick="remove(${i})">Delete</button></td>
+      <td><button onclick="remove(${i})" class="delete-btn">Delete</button></td>
     `;
     tbody.appendChild(row);
   });
 }
 
-function updateStatus(i,status){
+function updateStatus(i, status) {
   bookings[i].status = status;
   save();
 }
 
-function remove(i){
-  bookings.splice(i,1);
+function remove(i) {
+  bookings.splice(i, 1);
   save();
 }
 
-function save(){
+function save() {
   localStorage.setItem("bookings", JSON.stringify(bookings));
-  render();
+  render(); // refresh counts and table
 }
 
-function logout(){
+function logout() {
   localStorage.removeItem("adminLoggedIn");
   location.href = "admin-login.html";
 }
 
-function exportCSV(){
+function exportCSV() {
   let csv = "Name,Email,Service,Date,Time,Status\n";
-  bookings.forEach(b=>{
+  bookings.forEach(b => {
     csv += `${b.name},${b.email},${b.service},${b.date},${b.time},${b.status}\n`;
   });
-  const blob = new Blob([csv], {type:"text/csv"});
+  const blob = new Blob([csv], { type: "text/csv" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = "bookings.csv";
